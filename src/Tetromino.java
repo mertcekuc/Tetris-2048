@@ -95,7 +95,7 @@ public class Tetromino {
       for (Point tilePosition : occupiedTiles) { // using a for-each loop
          int colIndex = tilePosition.getX(), rowIndex = tilePosition.getY();
          // create a tile at the computed position
-         tileMatrix[rowIndex][colIndex] = new Tile();
+         tileMatrix[rowIndex][colIndex] = new Tile(type);
       }
       // initialize the position of the tetromino (the bottom left cell in the
       // tile matrix) with a random horizontal position above the game grid
@@ -192,6 +192,13 @@ public class Tetromino {
       else // direction == "down"
          bottomLeftCell.setY(bottomLeftCell.getY() - 1);
       return true; // a successful move in the given direction
+   }
+
+   public void goDown(GameGrid gameGrid){
+      while(canBeMoved("down", gameGrid)){
+         bottomLeftCell.setY(bottomLeftCell.getY() - 1);
+      }
+
    }
 
    // A method to check if the tetromino can be moved in the given direction or not

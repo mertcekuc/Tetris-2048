@@ -8,6 +8,7 @@ public class GameGrid {
    private Tile[][] tileMatrix; // to store the tiles locked on the game grid
    // the tetromino that is currently being moved on the game grid
    private Tetromino currentTetromino = null;
+   private Tetromino nextTetromino= null;
    // the gameOver flag shows whether the game is over or not
    private boolean gameOver = false;
    private Color emptyCellColor; // the color used for the empty grid cells
@@ -35,7 +36,6 @@ public class GameGrid {
 
    // A setter method for the currentTetromino data field
    public void setCurrentTetromino(Tetromino currentTetromino) {
-
       this.currentTetromino = currentTetromino;
    }
 
@@ -150,8 +150,6 @@ public class GameGrid {
             }
          }
             if(isFull){
-
-               System.out.println("row cleaning:" +i);
                for(int k=0; k<gridWidth; k++){
                   tileMatrix[i][k]=null;
             }

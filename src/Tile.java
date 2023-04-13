@@ -29,6 +29,66 @@ public class Tile {
       boxColor = new Color(0, 100, 200);
    }
 
+   public Tile(char type){
+      if (type == 'I'){
+         // set the number on the tile
+         number = 2;
+         // set the colors of the tile
+         backgroundColor = new Color(0, 236, 248);
+         foregroundColor = new Color(0, 0, 0);
+         boxColor = new Color(0, 100, 200);
+      }
+      else if(type == 'O'){
+         // set the number on the tile
+         number = 2;
+         // set the colors of the tile
+         backgroundColor = new Color(244, 255, 100);
+         foregroundColor = new Color(0, 0, 0);
+         boxColor = new Color(0, 100, 200);
+      }
+      else if (type == 'L'){
+         // set the number on the tile
+         number = 2;
+         // set the colors of the tile
+         backgroundColor = new Color(255, 188, 97);
+         foregroundColor = new Color(0, 0, 0);
+         boxColor = new Color(0, 100, 200);
+      }
+      else if (type == 'S'){
+         // set the number on the tile
+         number = 2;
+         // set the colors of the tile
+         backgroundColor = new Color(160, 254, 110);
+         foregroundColor = new Color(0, 0, 0);
+         boxColor = new Color(0, 100, 200);
+      }
+      else if (type == 'T'){
+         // set the number on the tile
+         number = 2;
+         // set the colors of the tile
+         backgroundColor = new Color(177, 92, 242);
+         foregroundColor = new Color(0, 0, 0);
+         boxColor = new Color(0, 100, 200);
+      }
+      else if (type == 'J'){
+         // set the number on the tile
+         number = 2;
+         // set the colors of the tile
+         backgroundColor = new Color(72, 104, 241);
+         foregroundColor = new Color(0, 0, 0);
+         boxColor = new Color(0, 100, 200);
+      }
+      else{
+         // set the number on the tile
+         number = 2;
+         // set the colors of the tile
+         backgroundColor = new Color(245, 83, 83);
+         foregroundColor = new Color(0, 0, 0);
+         boxColor = new Color(0, 100, 200);
+      }
+
+   }
+
    // a method for drawing the tile
    public void draw(Point position, double... sideLength) {
       // the default value for the side length (sLength) is 1

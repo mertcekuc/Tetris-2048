@@ -51,9 +51,13 @@ public class Tetris2048 {
          else if (StdDraw.isKeyPressed(KeyEvent.VK_DOWN))
             // move the active tetromino down by one
             currentTetromino.move("down", grid);
-
+            // rotate tetromino
          else if(StdDraw.isKeyPressed(KeyEvent.VK_UP)){
             currentTetromino.rotate();
+         }
+
+         else if(StdDraw.isKeyPressed(KeyEvent.VK_SPACE)){
+            currentTetromino.goDown(grid);
          }
 
          // move the active tetromino down by 1 once in 10 iterations (auto fall)
@@ -144,4 +148,5 @@ public class Tetris2048 {
          }
       }
    }
+
 }
