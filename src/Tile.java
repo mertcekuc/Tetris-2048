@@ -1,5 +1,6 @@
 import java.awt.Color; // the color type used in StdDraw
 import java.awt.Font; // the font type used in StdDraw
+import java.util.Random;
 
 // A class used for modeling numbered tiles as in 2048
 public class Tile {
@@ -30,9 +31,13 @@ public class Tile {
    }
 
    public Tile(char type){
+      Random random= new Random();
+      int numberpow=1 + random.nextInt(7);
+      number=(int)  (Math.pow(2,(double) numberpow));
+
       if (type == 'I'){
          // set the number on the tile
-         number = 2;
+
          // set the colors of the tile
          backgroundColor = new Color(0, 236, 248);
          foregroundColor = new Color(0, 0, 0);
@@ -40,7 +45,7 @@ public class Tile {
       }
       else if(type == 'O'){
          // set the number on the tile
-         number = 2;
+
          // set the colors of the tile
          backgroundColor = new Color(244, 255, 100);
          foregroundColor = new Color(0, 0, 0);
@@ -48,7 +53,7 @@ public class Tile {
       }
       else if (type == 'L'){
          // set the number on the tile
-         number = 2;
+
          // set the colors of the tile
          backgroundColor = new Color(255, 188, 97);
          foregroundColor = new Color(0, 0, 0);
@@ -56,7 +61,7 @@ public class Tile {
       }
       else if (type == 'S'){
          // set the number on the tile
-         number = 2;
+
          // set the colors of the tile
          backgroundColor = new Color(160, 254, 110);
          foregroundColor = new Color(0, 0, 0);
@@ -64,7 +69,7 @@ public class Tile {
       }
       else if (type == 'T'){
          // set the number on the tile
-         number = 2;
+
          // set the colors of the tile
          backgroundColor = new Color(177, 92, 242);
          foregroundColor = new Color(0, 0, 0);
@@ -72,7 +77,7 @@ public class Tile {
       }
       else if (type == 'J'){
          // set the number on the tile
-         number = 2;
+
          // set the colors of the tile
          backgroundColor = new Color(72, 104, 241);
          foregroundColor = new Color(0, 0, 0);
@@ -80,7 +85,7 @@ public class Tile {
       }
       else{
          // set the number on the tile
-         number = 2;
+
          // set the colors of the tile
          backgroundColor = new Color(245, 83, 83);
          foregroundColor = new Color(0, 0, 0);
@@ -109,5 +114,13 @@ public class Tile {
       StdDraw.setPenColor(foregroundColor);
       StdDraw.setFont(font);
       StdDraw.text(position.getX(), position.getY(), "" + number);
+   }
+
+   public int getNumber(){
+      return number;
+   }
+
+   public void setNumber(int num){
+      this.number=num;
    }
 }

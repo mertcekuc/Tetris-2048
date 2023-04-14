@@ -159,4 +159,34 @@ public class GameGrid {
          }
       }
    }
+
+   public void mergeTiles() {
+      for (int i = 1; i < gridHeight; i++) {
+         for (int j = 0; j < gridWidth; j++) {
+            if (tileMatrix[i][j] != null && tileMatrix[i - 1][j] != null) {
+               if (tileMatrix[i][j].getNumber() == tileMatrix[i - 1][j].getNumber()) {
+                  tileMatrix[i - 1][j].setNumber(tileMatrix[i - 1][j].getNumber() * 2);
+                  tileMatrix[i][j] = null;
+                  i=1;
+                  j=-1;
+               }
+            }
+         }
+      }
+   }
+
+   public void dropTiles(){
+      for (int i=1; i<gridHeight;i++){
+         for(int j=0;j<gridWidth;j++){
+            if(tileMatrix[i][j]!= null && tileMatrix[i-1][j]==null){
+               while(tileMatrix[i-1][j]==null){
+                  tileMatrix[i-1][j]=tileMatrix[i][j];
+                  tileMatrix[i][j]=null;
+               }
+            }
+         }
+      }
+
+   }
+
 }

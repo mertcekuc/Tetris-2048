@@ -82,8 +82,10 @@ public class Tetris2048 {
             currentTetromino = createTetromino();
             grid.setCurrentTetromino(currentTetromino);
          }
-
+         grid.mergeTiles();
+         grid.dropTiles();
          grid.cleanRow();
+         grid.dropTiles();
          // display the game grid and the current tetromino
          grid.display();
 
