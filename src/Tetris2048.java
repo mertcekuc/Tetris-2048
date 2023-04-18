@@ -9,10 +9,10 @@ public class Tetris2048 {
       // set the size of the game grid
       int gridH = 18, gridW = 12;
       // set the size of the drawing canvas
-      int canvasH = 40 * gridH, canvasW = 40 * gridW;
+      int canvasH = 40 * gridH, canvasW = 60 * gridW;
       StdDraw.setCanvasSize(canvasW, canvasH);
       // set the scale of the coordinate system
-      StdDraw.setXscale(-0.5, gridW - 0.5);
+      StdDraw.setXscale(-0.5, gridW + 3.5);
       StdDraw.setYscale(-0.5, gridH - 0.5);
       // double buffering enables computer animations, creating an illusion of
       // motion by repeating four steps: clear, draw, show and pause
@@ -85,14 +85,14 @@ public class Tetris2048 {
          grid.mergeTiles();
          grid.dropTiles();
          grid.cleanRow();
-         grid.dropTiles();
+
          // display the game grid and the current tetromino
          grid.display();
 
       }
 
       // print a message on the console that the game is over
-      System.out.println("Game over!");
+      System.out.println("Game over! Score:"+grid.score );
    }
 
    // A method for creating a random shaped tetromino to enter the game grid
@@ -118,7 +118,7 @@ public class Tetris2048 {
       // the relative path of the image file
       String imgFile = "images/menu_image.png";
       // center coordinates to display the image
-      double imgCenterX = (gridWidth - 1) / 2.0, imgCenterY = gridHeight - 7;
+      double imgCenterX = (gridWidth + 2.5) / 2.0, imgCenterY = gridHeight - 7;
       // display the image
       StdDraw.picture(imgCenterX, imgCenterY, imgFile);
       // the width and the height of the start game button
@@ -151,4 +151,15 @@ public class Tetris2048 {
       }
    }
 
+   public static void showScore(double gridW, double gridH){
+      double scoreX= gridW+1.5;
+      double scorey= gridH-3;
+
+      Font font=new Font("Arial",1,20);
+      StdDraw.setFont(font);
+      StdDraw.setPenColor(Color.WHITE);
+      StdDraw.text(scoreX,scorey,"Score: " +GameGrid.score);
+
+
+   }
 }

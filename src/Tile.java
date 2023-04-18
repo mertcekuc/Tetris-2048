@@ -32,7 +32,7 @@ public class Tile {
 
    public Tile(char type){
       Random random= new Random();
-      int numberpow=1 + random.nextInt(7);
+      int numberpow=1 + random.nextInt(5);
       number=(int)  (Math.pow(2,(double) numberpow));
 
       if (type == 'I'){

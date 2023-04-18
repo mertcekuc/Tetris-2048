@@ -16,6 +16,7 @@ public class GameGrid {
    private Color boundaryColor; // the color used for the grid boundaries
    private double lineThickness; // the thickness used for the grid lines
    private double boxThickness; // the thickness used for the grid boundaries
+   public static int score=0;
 
    // A constructor for creating the game grid based on the given parameters
    public GameGrid(int gridH, int gridW) {
@@ -51,6 +52,7 @@ public class GameGrid {
          currentTetromino.draw();
       // draw a box around the game grid
       drawBoundaries();
+      Tetris2048.showScore(gridWidth,gridHeight);
       // show the resulting drawing with a pause duration = 50 ms
       StdDraw.show();
       StdDraw.pause(50);
@@ -151,12 +153,13 @@ public class GameGrid {
          }
             if(isFull){
                for(int k=0; k<gridWidth; k++){
+                  score+=tileMatrix[i][k].getNumber();
                   tileMatrix[i][k]=null;
             }
                for (int row=i; row<gridHeight-1; row++){
                   tileMatrix[row]=tileMatrix[row+1];
                }
-         }
+            }
       }
    }
 
@@ -167,8 +170,7 @@ public class GameGrid {
                if (tileMatrix[i][j].getNumber() == tileMatrix[i - 1][j].getNumber()) {
                   tileMatrix[i - 1][j].setNumber(tileMatrix[i - 1][j].getNumber() * 2);
                   tileMatrix[i][j] = null;
-                  i=1;
-                  j=-1;
+
                }
             }
          }
@@ -178,15 +180,30 @@ public class GameGrid {
    public void dropTiles(){
       for (int i=1; i<gridHeight;i++){
          for(int j=0;j<gridWidth;j++){
-            if(tileMatrix[i][j]!= null && tileMatrix[i-1][j]==null){
-               while(tileMatrix[i-1][j]==null){
-                  tileMatrix[i-1][j]=tileMatrix[i][j];
-                  tileMatrix[i][j]=null;
+            if(tileMatrix[i][j]!= null){
+               if(j==0){
+                  if (tileMatrix[i-1][j]==null && tileMatrix[i][j+1]==null){
+                     tileMatrix[i-1][j]=tileMatrix[i][j];
+                     tileMatrix[i][j]=null;
+
+                  }
+               }
+               else if(j==gridWidth-1){
+                  if ((tileMatrix[i-1][j]==null && tileMatrix[i][j-1]==null)){
+                     tileMatrix[i-1][j]=tileMatrix[i][j];
+                     tileMatrix[i][j]=null;
+
+                  }
+               }
+               else{
+                  if (tileMatrix[i-1][j]==null && tileMatrix[i][j-1]==null && tileMatrix[i][j+1]==null){
+                     tileMatrix[i-1][j]=tileMatrix[i][j];
+                     tileMatrix[i][j]=null;
+
+                  }
                }
             }
          }
       }
-
    }
-
 }
