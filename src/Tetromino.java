@@ -286,6 +286,23 @@ public class Tetromino {
       tileMatrix = newTileMatrix;
       bottomLeftCell.setX(newBottomLeftCellX);
    }
+
+   public void showNext(){
+      int n=tileMatrix.length;
+      int posx= gridWidth + 1;
+      int posy= 6;
+      Point position = new Point(posx, posy);
+      for(int row=n-1; row>=0; row--){
+         for(int column=n-1; column>=0; column--){
+            if(tileMatrix[row][column]!= null){
+               tileMatrix[row][column].draw(position);
+            }
+            position.setX(position.getX()+1);
+         }
+         position.setX(posx);
+         position.setY(position.getY()+1);
+      }
+   }
 }
 
 

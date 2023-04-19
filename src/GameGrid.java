@@ -40,6 +40,10 @@ public class GameGrid {
       this.currentTetromino = currentTetromino;
    }
 
+   public void setNextTetromino(Tetromino nextTetromino){
+      this.nextTetromino= nextTetromino;
+   }
+
    // A method used for displaying the game grid
    public void display() {
       // clear the background to emptyCellColor
@@ -50,6 +54,7 @@ public class GameGrid {
       // game grid is updated)
       if (currentTetromino != null)
          currentTetromino.draw();
+         nextTetromino.showNext();
       // draw a box around the game grid
       drawBoundaries();
       Tetris2048.showScore(gridWidth,gridHeight);
@@ -143,67 +148,70 @@ public class GameGrid {
 
    public void cleanRow(){
       boolean isFull;
-      for(int i=0; i< gridHeight; i++){
+      for(int i=0; i<gridHeight-1; i++){
          isFull=true;
-         for(int j=0; j< gridWidth; j++){
+         for(int j=0; j<gridWidth; j++){
             if(tileMatrix[i][j]==null){
                isFull=false;
                break;
             }
          }
-            if(isFull){
-               for(int k=0; k<gridWidth; k++){
-                  score+=tileMatrix[i][k].getNumber();
-                  tileMatrix[i][k]=null;
+         if(isFull){
+            for(int k=0; k<gridWidth; k++){
+               score+=tileMatrix[i][k].getNumber();
+               tileMatrix[i][k]=null;
             }
-               for (int row=i; row<gridHeight-1; row++){
-                  tileMatrix[row]=tileMatrix[row+1];
-               }
+            // Move all rows above the current row down by one
+            for (int row=i; row<gridHeight-1; row++){
+               tileMatrix[row]=tileMatrix[row+1].clone(); // Create a new row and copy elements
             }
+            // Create a new empty row at the top
+            tileMatrix[gridHeight-1] = new Tile[gridWidth];
+         }
       }
    }
 
    public void mergeTiles() {
       for (int i = 1; i < gridHeight; i++) {
          for (int j = 0; j < gridWidth; j++) {
-            if (tileMatrix[i][j] != null && tileMatrix[i - 1][j] != null) {
-               if (tileMatrix[i][j].getNumber() == tileMatrix[i - 1][j].getNumber()) {
-                  tileMatrix[i - 1][j].setNumber(tileMatrix[i - 1][j].getNumber() * 2);
-                  tileMatrix[i][j] = null;
+            if (tileMatrix[i][j] != null && tileMatrix[i - 1][j] != null
+                    && tileMatrix[i][j].getNumber() == tileMatrix[i - 1][j].getNumber()) {
+               tileMatrix[i - 1][j].setNumber(tileMatrix[i - 1][j].getNumber() * 2);
+               tileMatrix[i][j] = null;
+            }
+         }
+      }
+   }
 
+
+   public void dropTiles() {
+      for (int i = 1; i < gridHeight; i++) {
+         for (int j = 0; j < gridWidth; j++) {
+            if (tileMatrix[i][j] != null) {
+               if (j == 0) {
+                  if (tileMatrix[i - 1][j] == null && tileMatrix[i][j + 1] == null) {
+                     tileMatrix[i - 1][j] = tileMatrix[i][j];
+                     tileMatrix[i][j] = null;
+                  }
+               } else if (j == gridWidth - 1) {
+                  if (tileMatrix[i - 1][j] == null && tileMatrix[i][j - 1] == null) {
+                     tileMatrix[i - 1][j] = tileMatrix[i][j];
+                     tileMatrix[i][j] = null;
+                  }
+               } else {
+                  if (tileMatrix[i - 1][j] == null && tileMatrix[i][j - 1] == null && tileMatrix[i][j + 1] == null) {
+                     tileMatrix[i - 1][j] = tileMatrix[i][j];
+                     tileMatrix[i][j] = null;
+                  } else if (tileMatrix[i - 1][j] != null && tileMatrix[i][j - 1] != null && tileMatrix[i][j + 1] != null
+                          && tileMatrix[i - 1][j - 1] == null && tileMatrix[i - 1][j + 1] == null) {
+                     tileMatrix[i - 1][j] = tileMatrix[i][j];
+                     tileMatrix[i][j] = null;
+                  }
                }
             }
          }
       }
    }
 
-   public void dropTiles(){
-      for (int i=1; i<gridHeight;i++){
-         for(int j=0;j<gridWidth;j++){
-            if(tileMatrix[i][j]!= null){
-               if(j==0){
-                  if (tileMatrix[i-1][j]==null && tileMatrix[i][j+1]==null){
-                     tileMatrix[i-1][j]=tileMatrix[i][j];
-                     tileMatrix[i][j]=null;
 
-                  }
-               }
-               else if(j==gridWidth-1){
-                  if ((tileMatrix[i-1][j]==null && tileMatrix[i][j-1]==null)){
-                     tileMatrix[i-1][j]=tileMatrix[i][j];
-                     tileMatrix[i][j]=null;
-
-                  }
-               }
-               else{
-                  if (tileMatrix[i-1][j]==null && tileMatrix[i][j-1]==null && tileMatrix[i][j+1]==null){
-                     tileMatrix[i-1][j]=tileMatrix[i][j];
-                     tileMatrix[i][j]=null;
-
-                  }
-               }
-            }
-         }
-      }
-   }
 }

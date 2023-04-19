@@ -9,10 +9,10 @@ public class Tetris2048 {
       // set the size of the game grid
       int gridH = 18, gridW = 12;
       // set the size of the drawing canvas
-      int canvasH = 40 * gridH, canvasW = 60 * gridW;
+      int canvasH = 40 * gridH, canvasW = 50 * gridW;
       StdDraw.setCanvasSize(canvasW, canvasH);
       // set the scale of the coordinate system
-      StdDraw.setXscale(-0.5, gridW + 3.5);
+      StdDraw.setXscale(-0.5, gridW + 4.5);
       StdDraw.setYscale(-0.5, gridH - 0.5);
       // double buffering enables computer animations, creating an illusion of
       // motion by repeating four steps: clear, draw, show and pause
@@ -26,9 +26,11 @@ public class Tetris2048 {
       GameGrid grid = new GameGrid(gridH, gridW);
       // create the first tetromino to enter the game grid
       // by using the createTetromino method defined below
-      Tetromino currentTetromino = createTetromino();
-      grid.setCurrentTetromino(currentTetromino);
 
+      Tetromino currentTetromino = createTetromino();
+      Tetromino nextTetromino = createTetromino();
+      grid.setNextTetromino(nextTetromino);
+      grid.setCurrentTetromino(currentTetromino);
       // display a simple menu before opening the game
       // by using the displayGameMenu method defined below
       displayGameMenu(gridH, gridW);
@@ -79,8 +81,10 @@ public class Tetris2048 {
                break;
             // create the next tetromino to enter the game grid
             // by using the createTetromino function defined below
-            currentTetromino = createTetromino();
+            currentTetromino = nextTetromino;
+            nextTetromino= createTetromino();
             grid.setCurrentTetromino(currentTetromino);
+            grid.setNextTetromino(nextTetromino);
          }
          grid.mergeTiles();
          grid.dropTiles();
@@ -118,7 +122,7 @@ public class Tetris2048 {
       // the relative path of the image file
       String imgFile = "images/menu_image.png";
       // center coordinates to display the image
-      double imgCenterX = (gridWidth + 2.5) / 2.0, imgCenterY = gridHeight - 7;
+      double imgCenterX = (gridWidth + 3.5) / 2.0, imgCenterY = gridHeight - 7;
       // display the image
       StdDraw.picture(imgCenterX, imgCenterY, imgFile);
       // the width and the height of the start game button
