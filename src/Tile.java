@@ -21,14 +21,6 @@ public class Tile {
    // Methods
    // --------------------------------------------------------------------------
    // the default constructor that creates a tile with 2 as the number on it
-   public Tile() {
-      // set the number on the tile
-      number = 2;
-      // set the colors of the tile
-      backgroundColor = new Color(151, 178, 199);
-      foregroundColor = new Color(0, 100, 200);
-      boxColor = new Color(0, 100, 200);
-   }
 
    public Tile(char type){
       Random random= new Random();
@@ -39,57 +31,57 @@ public class Tile {
          // set the number on the tile
 
          // set the colors of the tile
-         backgroundColor = new Color(0, 236, 248);
+         backgroundColor = new Color(124, 229, 255);
          foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(0, 100, 200);
+         boxColor = new Color(97, 97, 97);
       }
       else if(type == 'O'){
          // set the number on the tile
 
          // set the colors of the tile
-         backgroundColor = new Color(244, 255, 100);
+         backgroundColor = new Color(255, 255, 129);
          foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(0, 100, 200);
+         boxColor = new Color(97, 97, 97);
       }
       else if (type == 'L'){
          // set the number on the tile
 
          // set the colors of the tile
-         backgroundColor = new Color(255, 188, 97);
+         backgroundColor = new Color(255, 175, 129);
          foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(0, 100, 200);
+         boxColor = new Color(97, 97, 97);
       }
       else if (type == 'S'){
          // set the number on the tile
 
          // set the colors of the tile
-         backgroundColor = new Color(160, 254, 110);
+         backgroundColor = new Color(149, 255, 128);
          foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(0, 100, 200);
+         boxColor = new Color(97, 97, 97);
       }
       else if (type == 'T'){
          // set the number on the tile
 
          // set the colors of the tile
-         backgroundColor = new Color(177, 92, 242);
+         backgroundColor = new Color(238, 128, 255);
          foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(0, 100, 200);
+         boxColor = new Color(97, 97, 97);
       }
       else if (type == 'J'){
          // set the number on the tile
 
          // set the colors of the tile
-         backgroundColor = new Color(72, 104, 241);
+         backgroundColor = new Color(127, 155, 255);
          foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(0, 100, 200);
+         boxColor = new Color(97, 97, 97);
       }
       else{
          // set the number on the tile
 
          // set the colors of the tile
-         backgroundColor = new Color(245, 83, 83);
+         backgroundColor = new Color(255, 110, 110);
          foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(0, 100, 200);
+         boxColor = new Color(97, 97, 97);
       }
 
    }

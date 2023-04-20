@@ -26,10 +26,10 @@ public class GameGrid {
       // create the tile matrix to store the tiles locked on the game grid
       tileMatrix = new Tile[gridHeight][gridWidth];
       // set the color used for the empty grid cells
-      emptyCellColor = new Color(42, 69, 99);
+      emptyCellColor = new Color(42, 26, 59, 255);
       // set the colors used for the grid lines and the grid boundaries
-      lineColor = new Color(0, 100, 200);
-      boundaryColor = new Color(0, 100, 200);
+      lineColor = new Color(82, 49, 112);
+      boundaryColor = new Color(123, 105, 172);
       // set the thickness values used for the grid lines and the grid boundaries
       lineThickness = 0.002;
       boxThickness = 10 * lineThickness;
@@ -185,33 +185,74 @@ public class GameGrid {
 
 
    public void dropTiles() {
-      for (int i = 1; i < gridHeight; i++) {
-         for (int j = 0; j < gridWidth; j++) {
-            if (tileMatrix[i][j] != null) {
-               if (j == 0) {
-                  if (tileMatrix[i - 1][j] == null && tileMatrix[i][j + 1] == null) {
-                     tileMatrix[i - 1][j] = tileMatrix[i][j];
-                     tileMatrix[i][j] = null;
-                  }
-               } else if (j == gridWidth - 1) {
-                  if (tileMatrix[i - 1][j] == null && tileMatrix[i][j - 1] == null) {
-                     tileMatrix[i - 1][j] = tileMatrix[i][j];
-                     tileMatrix[i][j] = null;
-                  }
-               } else {
-                  if (tileMatrix[i - 1][j] == null && tileMatrix[i][j - 1] == null && tileMatrix[i][j + 1] == null) {
-                     tileMatrix[i - 1][j] = tileMatrix[i][j];
-                     tileMatrix[i][j] = null;
-                  } else if (tileMatrix[i - 1][j] != null && tileMatrix[i][j - 1] != null && tileMatrix[i][j + 1] != null
-                          && tileMatrix[i - 1][j - 1] == null && tileMatrix[i - 1][j + 1] == null) {
-                     tileMatrix[i - 1][j] = tileMatrix[i][j];
-                     tileMatrix[i][j] = null;
+      boolean drop=false;
+
+      for (int row = 1; row < gridHeight; row++) {
+         for (int col = 0; col < gridWidth; col++) {
+            int nextcol=col;
+            int dropToCol=col;
+
+            if(col==gridWidth-1){
+               if(tileMatrix[row][col]!=null){
+               if(tileMatrix[row-1][col]==null){
+                  drop=true;
+               }
+            }
+            }
+            else {
+               if (tileMatrix[row][col] != null) {
+                  if (tileMatrix[row - 1][col] != null) {
+                     for (int i = col + 1; i < gridWidth; i++) {
+                        if (tileMatrix[row][i] != null)
+                           nextcol = i;
+                        else
+                           break;
+                     }
+                  } else {
+                     for (int i = col; i < gridWidth; i++) {
+                        if (tileMatrix[row][i] != null && tileMatrix[row - 1][i] != null) {
+                           nextcol = i - 1;
+                           break;
+                        } else if (tileMatrix[row][i] != null && tileMatrix[row - 1][i] == null) {
+                           if (i == gridWidth - 1) {
+                              drop = true;
+                              dropToCol = i;
+                              break;
+                           } else
+                              continue;
+                        } else if (tileMatrix[row][i] == null) {
+                           drop = true;
+                           dropToCol = i - 1;
+
+                           break;
+                        }
+
+                     }
                   }
                }
             }
+
+               if (drop) {
+                  int k=row;
+                  System.out.println("cleaning " +col +" to " +dropToCol +" in " +row);
+                  for(int y=col; y<=dropToCol; y++) {
+                     while (tileMatrix[k - 1][y] == null && k != 0) {
+                        tileMatrix[k - 1][y] = tileMatrix[k][y];
+                        tileMatrix[k][y] = null;
+                        k--;
+                        if (k==0)
+                           break;
+                     }
+                  }
+                  return;
+               }
+               col=nextcol;
          }
       }
+
    }
-
-
 }
+
+
+
+
