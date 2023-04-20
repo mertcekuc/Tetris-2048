@@ -146,30 +146,34 @@ public class GameGrid {
       return gameOver;
    }
 
-   public void cleanRow(){
+   public void cleanRow() {
       boolean isFull;
-      for(int i=0; i<gridHeight-1; i++){
-         isFull=true;
-         for(int j=0; j<gridWidth; j++){
-            if(tileMatrix[i][j]==null){
-               isFull=false;
+      Tile[] emptyRow = new Tile[gridWidth]; // Create empty row outside the loop
+
+      for (int i = 0; i < gridHeight - 1; i++) {
+         isFull = true;
+
+         for (int j = 0; j < gridWidth; j++) {
+            if (tileMatrix[i][j] == null) {
+               isFull = false;
                break;
             }
          }
-         if(isFull){
-            for(int k=0; k<gridWidth; k++){
-               score+=tileMatrix[i][k].getNumber();
-               tileMatrix[i][k]=null;
+
+         if (isFull) {
+            for (int k = 0; k < gridWidth; k++) {
+               score += tileMatrix[i][k].getNumber();
+               tileMatrix[i][k] = null;
             }
+
             // Move all rows above the current row down by one
-            for (int row=i; row<gridHeight-1; row++){
-               tileMatrix[row]=tileMatrix[row+1].clone(); // Create a new row and copy elements
-            }
-            // Create a new empty row at the top
-            tileMatrix[gridHeight-1] = new Tile[gridWidth];
+            System.arraycopy(tileMatrix, i + 1, tileMatrix, i, gridHeight - i - 1);
+            tileMatrix[gridHeight - 1] = emptyRow; // Reuse empty row
+            i--; // Recheck current row
          }
       }
    }
+
 
    public void mergeTiles() {
       for (int i = 1; i < gridHeight; i++) {
@@ -183,30 +187,28 @@ public class GameGrid {
       }
    }
 
-
    public void dropTiles() {
-      boolean drop=false;
+      boolean drop = false;
 
       for (int row = 1; row < gridHeight; row++) {
-         for (int col = 0; col < gridWidth; col++) {
-            int nextcol=col;
-            int dropToCol=col;
+         int col = 0;
+         while (col < gridWidth) {
+            int nextcol = col;
+            int dropToCol = col;
 
-            if(col==gridWidth-1){
-               if(tileMatrix[row][col]!=null){
-               if(tileMatrix[row-1][col]==null){
-                  drop=true;
+            if (col == gridWidth - 1) {
+               if (tileMatrix[row][col] != null && tileMatrix[row - 1][col] == null) {
+                  drop = true;
                }
-            }
-            }
-            else {
+            } else {
                if (tileMatrix[row][col] != null) {
                   if (tileMatrix[row - 1][col] != null) {
                      for (int i = col + 1; i < gridWidth; i++) {
-                        if (tileMatrix[row][i] != null)
+                        if (tileMatrix[row][i] != null) {
                            nextcol = i;
-                        else
+                        } else {
                            break;
+                        }
                      }
                   } else {
                      for (int i = col; i < gridWidth; i++) {
@@ -218,38 +220,33 @@ public class GameGrid {
                               drop = true;
                               dropToCol = i;
                               break;
-                           } else
-                              continue;
+                           }
                         } else if (tileMatrix[row][i] == null) {
                            drop = true;
                            dropToCol = i - 1;
-
                            break;
                         }
-
                      }
                   }
                }
             }
 
-               if (drop) {
-                  int k=row;
-                  System.out.println("cleaning " +col +" to " +dropToCol +" in " +row);
-                  for(int y=col; y<=dropToCol; y++) {
-                     while (tileMatrix[k - 1][y] == null && k != 0) {
-                        tileMatrix[k - 1][y] = tileMatrix[k][y];
-                        tileMatrix[k][y] = null;
-                        k--;
-                        if (k==0)
-                           break;
-                     }
+            if (drop) {
+               int k = row;
+               int y = col;
+               while (k > 0 && y <= dropToCol) {
+                  while ( k > 0  && tileMatrix[k - 1][y] == null) {
+                     tileMatrix[k - 1][y] = tileMatrix[k][y];
+                     tileMatrix[k][y] = null;
+                     k--;
                   }
-                  return;
+                  y++;
                }
-               col=nextcol;
+               return;
+            }
+            col = nextcol + 1;
          }
       }
-
    }
 }
 

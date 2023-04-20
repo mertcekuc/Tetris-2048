@@ -13,7 +13,7 @@ public class Tetris2048 {
       // set the size of the game grid
       int gridH = 18, gridW = 12;
       // set the size of the drawing canvas
-      int canvasH = 40 * gridH, canvasW = 50 * gridW;
+      int canvasH = 30 * gridH, canvasW = 50 * gridW;
       StdDraw.setCanvasSize(canvasW, canvasH);
       // set the scale of the coordinate system
       StdDraw.setXscale(-0.5, gridW + 4.5);
@@ -226,9 +226,9 @@ public class Tetris2048 {
       StdDraw.setPenColor(textColor);
       String textToDisplay2 = "Restart Game";
       StdDraw.text(restartX, restartY, textToDisplay2);
-      boolean loop=true;
+
       // menu interaction loop
-      while (loop) {
+      while (true) {
          // display the menu and wait for a short time (50 ms)
          StdDraw.show();
          StdDraw.pause(50);
