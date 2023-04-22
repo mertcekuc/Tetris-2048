@@ -79,6 +79,10 @@ public class Tetromino {
          occupiedTiles[2] = new Point(1, 2);
          occupiedTiles[3] = new Point(0, 2);
 
+      }else if (type == '.') {
+         occupiedTiles = new Point[1];
+         n=1;
+         occupiedTiles[0] = new Point(0,0 );
 
       } else { // type == 'Z'
          n = 3; // n = number of rows = number of columns in the tile matrix

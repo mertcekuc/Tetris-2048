@@ -168,7 +168,7 @@ public class GameGrid {
 
             // Move all rows above the current row down by one
             System.arraycopy(tileMatrix, i + 1, tileMatrix, i, gridHeight - i - 1);
-            tileMatrix[gridHeight - 1] = emptyRow; // Reuse empty row
+            tileMatrix[gridHeight - 1] = emptyRow.clone(); // Reuse empty row
             i--; // Recheck current row
          }
       }
@@ -180,9 +180,20 @@ public class GameGrid {
          for (int j = 0; j < gridWidth; j++) {
             if (tileMatrix[i][j] != null && tileMatrix[i - 1][j] != null
                     && tileMatrix[i][j].getNumber() == tileMatrix[i - 1][j].getNumber()) {
-               tileMatrix[i - 1][j].setNumber(tileMatrix[i - 1][j].getNumber() * 2);
+               tileMatrix[i - 1][j].setNumber(tileMatrix[i - 1][j].getNumber() + tileMatrix[i][j].getNumber());
                tileMatrix[i][j] = null;
+
+            int row = i;
+            while (row!= gridHeight-1l) {
+               tileMatrix[row][j] = tileMatrix[row + 1][j];
+               tileMatrix[row+1][j]=null;
+               if(tileMatrix[row+1][j]==null && tileMatrix[row+2][j]==null){
+                  break;
+               }
+               row++;
             }
+            return;
+         }
          }
       }
    }

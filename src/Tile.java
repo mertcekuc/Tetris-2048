@@ -47,6 +47,11 @@ public class Tile {
       else if (type == 'J'){
          backgroundColor = new Color(127, 155, 255);
       }
+
+      else if (type == '.'){
+         backgroundColor = new Color(237, 210, 255);
+      }
+
       else{
          backgroundColor = new Color(255, 110, 110);
       }
@@ -81,4 +86,6 @@ public class Tile {
    public void setNumber(int num){
       this.number=num;
    }
+
+
 }
