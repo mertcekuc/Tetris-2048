@@ -26,64 +26,30 @@ public class Tile {
       Random random= new Random();
       int numberpow=1 + random.nextInt(5);
       number=(int)  (Math.pow(2,(double) numberpow));
+      foregroundColor = new Color(42, 26, 59, 255);
+      boxColor = new Color(82, 49, 112);
 
       if (type == 'I'){
-         // set the number on the tile
-
-         // set the colors of the tile
          backgroundColor = new Color(124, 229, 255);
-         foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(97, 97, 97);
       }
       else if(type == 'O'){
-         // set the number on the tile
-
-         // set the colors of the tile
          backgroundColor = new Color(255, 255, 129);
-         foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(97, 97, 97);
       }
       else if (type == 'L'){
-         // set the number on the tile
-
-         // set the colors of the tile
          backgroundColor = new Color(255, 175, 129);
-         foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(97, 97, 97);
       }
       else if (type == 'S'){
-         // set the number on the tile
-
-         // set the colors of the tile
          backgroundColor = new Color(149, 255, 128);
-         foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(97, 97, 97);
       }
       else if (type == 'T'){
-         // set the number on the tile
-
-         // set the colors of the tile
          backgroundColor = new Color(238, 128, 255);
-         foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(97, 97, 97);
       }
       else if (type == 'J'){
-         // set the number on the tile
-
-         // set the colors of the tile
          backgroundColor = new Color(127, 155, 255);
-         foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(97, 97, 97);
       }
       else{
-         // set the number on the tile
-
-         // set the colors of the tile
          backgroundColor = new Color(255, 110, 110);
-         foregroundColor = new Color(0, 0, 0);
-         boxColor = new Color(97, 97, 97);
       }
-
    }
 
    // a method for drawing the tile

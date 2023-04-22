@@ -13,7 +13,7 @@ public class Tetris2048 {
       // set the size of the game grid
       int gridH = 18, gridW = 12;
       // set the size of the drawing canvas
-      int canvasH = 30 * gridH, canvasW = 50 * gridW;
+      int canvasH = 40 * gridH, canvasW = 50 * gridW;
       StdDraw.setCanvasSize(canvasW, canvasH);
       // set the scale of the coordinate system
       StdDraw.setXscale(-0.5, gridW + 4.5);

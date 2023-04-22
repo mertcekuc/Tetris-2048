@@ -289,8 +289,8 @@ public class Tetromino {
 
    public void showNext(){
       int n=tileMatrix.length;
-      int posx= gridWidth + 1;
-      int posy= 6;
+      int posx= gridWidth +1;
+      int posy= 3;
       Point position = new Point(posx, posy);
       for(int row=n-1; row>=0; row--){
          for(int column=n-1; column>=0; column--){
