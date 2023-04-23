@@ -181,13 +181,12 @@ public class GameGrid {
             if (tileMatrix[i][j] != null && tileMatrix[i - 1][j] != null
                     && tileMatrix[i][j].getNumber() == tileMatrix[i - 1][j].getNumber()) {
                tileMatrix[i - 1][j].setNumber(tileMatrix[i - 1][j].getNumber() + tileMatrix[i][j].getNumber());
-               tileMatrix[i][j] = null;
+
 
             int row = i;
-            while (row!= gridHeight-1l) {
-               tileMatrix[row][j] = tileMatrix[row + 1][j];
-               tileMatrix[row+1][j]=null;
-               if(tileMatrix[row+1][j]==null && tileMatrix[row+2][j]==null){
+            while (row < gridHeight-1l) {
+               tileMatrix[row][j] = tileMatrix[row + 1][j];;
+               if(tileMatrix[row+1][j]==null){
                   break;
                }
                row++;
